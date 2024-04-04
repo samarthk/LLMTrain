@@ -112,6 +112,10 @@ faiss_train_examples = pdf_subset.apply(
 
 # COMMAND ----------
 
+pdf_subset.display()
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC
 # MAGIC #### Vectorize text into embedding vectors
@@ -128,6 +132,17 @@ model = SentenceTransformer(
 )  # Use a pre-cached model
 faiss_title_embedding = model.encode(pdf_subset.title.values.tolist())
 len(faiss_title_embedding), len(faiss_title_embedding[0])
+
+# COMMAND ----------
+
+display(faiss_title_embedding)
+
+# COMMAND ----------
+
+from matplotlib import pyplot as plt
+plt.imshow(faiss_title_embedding, interpolation='nearest')
+plt.show()
+
 
 # COMMAND ----------
 
@@ -181,6 +196,10 @@ def search_content(query, pdf_to_index, k=3):
 # COMMAND ----------
 
 display(search_content("animal", pdf_to_index))
+
+# COMMAND ----------
+
+display(search_content("promo", pdf_to_index))
 
 # COMMAND ----------
 
